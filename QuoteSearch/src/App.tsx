@@ -8,10 +8,10 @@ interface Quote{
 };
 
 function App() {
-  const [quote, setQuote] = useState<Quote[]>([{content:'',author:''}])
+  const [quote, setQuote] = useState<Quote>({content:'',author:''})
+  const [quotes, setQuotes] = useState<Quote[]>([])
   async function getRandomQuote(){
     const result = await fetch("https://usu-quotes-mimic.vercel.app/api/random");
-
     setQuote(await result.json())
   }
 
@@ -19,6 +19,12 @@ function App() {
     getRandomQuote()
   }, [])
 
+  async function getQuote(search: string){
+    const result = await fetch("https://usu-quotes-mimic.vercel.app/api/random/"+search);
+    setQuotes(await result.json())
+  }
+
+  
   return (
     <div className="App">
       <h2>Quotes</h2>
@@ -27,13 +33,7 @@ function App() {
         <button>Enter</button>
       </form>
       <div>
-        {
-          quote.map((data) =>{
-              return(
-                <p className = "randomQuote">{data.content}</p>
-              )
-            })
-        }
+        {quote.content}
       </div>
     </div>
   )
