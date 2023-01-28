@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
@@ -29,31 +29,35 @@ function App() {
     console.log(result)
   }
 
-  const submitSearch = (event) =>{
+  const submitSearch = (event: any) =>{
     event.preventDefault()
     getQuotes(event.target.quoteSearch.value)
   }
 
   return (
     <div className="App">
-      <h2>Quotes</h2>
-      <form onSubmit={submitSearch}>
-        <input name='quoteSearch' type='text' placeholder='Search for a quote...'/>
-        <button>Enter</button>
-      </form>
-      <div>
-        {quote.content}
-        <p className = 'author'>-{quote.author}</p>
-      </div>
-      <div>
-        {
-          quotes.map((quote) =>(
-            <div key={quote._id}>
-              {quote.content}
-              -{quote.author}
-            </div>
-          ))
-        }
+      <div className='container'>
+        <h1>Quote Search</h1>
+        <div className='formContainer'>
+          <form onSubmit={submitSearch}>
+            <input name='quoteSearch' type='text' placeholder='Search...'/>
+            <button>Enter</button>
+          </form>
+        </div>
+        <div className='quote' id='original'>
+          {quote.content}
+          <p className = 'author'>-{quote.author}</p>
+        </div>
+        <div className='searched'>
+          {
+            quotes.map((quote) =>(
+              <div key={quote._id} className='quote'>
+                <div>{quote.content}</div>
+                <div className='author'>-{quote.author}</div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   )
