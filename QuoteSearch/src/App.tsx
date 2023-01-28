@@ -44,11 +44,11 @@ function App() {
             <button>Enter</button>
           </form>
         </div>
-        <div className='quote' id='original'>
-          {quote.content}
-          <p className = 'author'>-{quote.author}</p>
-        </div>
         <div className='searched'>
+          <div className='quote'>
+            {quote.content}
+            <p className = 'author'>-{quote.author}</p>
+          </div>
           {
             quotes.map((quote) =>(
               <div key={quote._id} className='quote'>
